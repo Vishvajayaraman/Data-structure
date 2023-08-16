@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Enter the number of register numbers: ");
+    scanf("%d", &n);
+
+    int registerNumbers[n];
+    printf("Enter %d register numbers:\n", n);
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &registerNumbers[i]);
+    }
+
+    int target;
+    printf("Enter the register number to search for: ");
+    scanf("%d", &target);
+
+    int found = 0;
+    for (int i = 0; i < n; ++i) {
+        if (registerNumbers[i] == target) {
+            printf("Register number %d found at index %d\n", target, i);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Register number %d not found in the list.\n", target);
+    }
+
+    return 0;
+}

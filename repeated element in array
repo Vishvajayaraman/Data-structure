@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int findRepeatedElement(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (arr[i] == arr[j]) {
+                return arr[i];
+            }
+        }
+    }
+    return -1; 
+}
+
+int main() {
+    int size;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+
+    int arr[size];
+
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int repeatedElement = findRepeatedElement(arr, size);
+
+    if (repeatedElement != -1) {
+        printf("The repeated element is: %d\n", repeatedElement);
+    } else {
+        printf("No repeated element found.\n");
+    }
+
+    return 0;
+}

@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_NODES 10
+
+
+int findNearestNeighbor(int graph[MAX_NODES][MAX_NODES], int n, bool visited[], int currentNode) {
+    int nearestNeighbor = -1;
+    int minDistance = __INT_MAX__;
+
+    for (int i = 0; i < n; i++) {
+        if (!visited[i] && graph[currentNode][i] < minDistance) {
+            nearestNeighbor = i;
+            minDistance = graph[currentNode][i];
+        }
+    }
+
+    return nearestNeighbor;
+}
+
+
+void solveTSP(int graph[MAX_NODES][MAX_NODES], int n) {
+    bool visited[MAX_NODES];
+    for (int i = 0; i < n; i++) {
+        visited[i] = false;
+    }
+
+    int path[MAX_NODES];
+    int current = 0;
+    path[0] = current;
+    visited[current] = true;
+
+    for (int i = 1; i < n; i++) {
+        int next = findNearestNeighbor(graph, n, visited, current);
+        path[i] = next;
+        visited[next] = true;
+        current = next;
+    }
+
+    
+    path[n] = path[0];
+
+    printf("Approximate TSP Path: ");
+    for (int i = 0; i <= n; i++) {
+        printf("%d ", path[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+
+    int graph[MAX_NODES][MAX_NODES];
+    printf("Enter the adjacency matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+
+    solveTSP(graph, n);
+
+    return 0;
+}
